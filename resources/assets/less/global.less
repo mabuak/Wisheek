@@ -1,0 +1,92 @@
+html, body {
+    height: 100%;
+    font-family: 'proxima-nova';
+}
+
+body {
+  	min-width: 320px;
+  	background-color: rgba(0,0,0,0.03);
+}
+
+orange{
+	color: @orange;
+}
+
+.push {
+    min-height: 100%;
+    margin-bottom: -271px;
+}
+
+.ct{
+	text-align: center;
+}
+
+.va{
+ position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.fh{
+    height: 90vh;
+ }
+
+.am{
+ 	  	margin: 0 auto;
+ 	  	width:400px;
+ }
+
+.hiden,
+.ui.hidden{
+	display: none;
+}
+
+ .wrapper{ 
+	position: relative;
+}
+ 
+.wrapper.pad{
+	padding:60px 0;	
+}
+
+#header{
+  padding: 25px;
+  font-size: 2.5em;
+  font-weight: 300;
+}
+
+
+
+#header_logo{
+  display: inline-block;
+  font-family: 'funkydori';
+  color: #333;
+  margin-top: 10px;
+}
+
+#header_buttons{
+  display: inline-block;
+  float: right;
+}
+
+
+
+#header i.car{
+	margin: 0 10px;
+}
+
+.fouc {
+  opacity: 1;
+  transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transition: transform .4s ease-in-out, opacity .4s ease-in-out;
+  -webkit-transition: -webkit-transform .4s ease-in-out, opacity .4s ease-in-out;
+}
+
+.wf-loading .fouc {
+  opacity: 0;
+  transform: translateY(-20px);
+  -ms-transform: translateY(-20px);
+  -webkit-transform: translateY(-20px);
+}

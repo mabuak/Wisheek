@@ -1,0 +1,349 @@
+/*******************************
+         Site Settings
+*******************************/
+/*-------------------
+       Fonts
+--------------------*/
+/*-------------------
+      Base Sizes
+--------------------*/
+/* This is the single variable that controls them all */
+/* The size of page text  */
+/*-------------------
+    Border Radius
+--------------------*/
+/* See Power-user section below
+   for explanation of @px variables
+*/
+/*-------------------
+    Brand Colors
+--------------------*/
+/*--------------
+  Page Heading
+---------------*/
+/*--------------
+   Form Input
+---------------*/
+/* This adjusts the default form input across all elements */
+/* Input Text Color */
+/* Line Height Default For Inputs in Browser */
+/*-------------------
+    Focused Input
+--------------------*/
+/* Used on inputs, textarea etc */
+/* Used on dropdowns, other larger blocks */
+/*-------------------
+        Sizes
+--------------------*/
+/*
+  Sizes are all expressed in terms of 14px/em (default em)
+  This ensures these "ratios" remain constant despite changes in EM
+*/
+/*-------------------
+        Page
+--------------------*/
+/*-------------------
+      Paragraph
+--------------------*/
+/*-------------------
+       Links
+--------------------*/
+/*-------------------
+  Highlighted Text
+--------------------*/
+/*-------------------
+       Loader
+--------------------*/
+/*-------------------
+        Grid
+--------------------*/
+/*-------------------
+     Transitions
+--------------------*/
+/*-------------------
+     Breakpoints
+--------------------*/
+/*-------------------
+      Site Colors
+--------------------*/
+/*---  Colors  ---*/
+/*---  Light Colors  ---*/
+/*---   Neutrals  ---*/
+/*--- Colored Backgrounds ---*/
+/*--- Colored Headers ---*/
+/*--- Colored Text ---*/
+/*--- Colored Border ---*/
+/*-------------------
+     Alpha Colors
+--------------------*/
+/*-------------------
+       Accents
+--------------------*/
+/* Differentiating Neutrals */
+/* Differentiating Layers */
+/*******************************
+           Power-User
+*******************************/
+/*-------------------
+    Emotive Colors
+--------------------*/
+/* Positive */
+/* Negative */
+/* Info */
+/* Warning */
+/*-------------------
+        Paths
+--------------------*/
+/* For source only. Modified in gulp for dist */
+/*-------------------
+       Em Sizes
+--------------------*/
+/*
+  This rounds @size values to the closest pixel then expresses that value in (r)em.
+  This ensures all size values round to exact pixels
+*/
+/* em */
+/* rem */
+/*-------------------
+       Icons
+--------------------*/
+/* Maximum Glyph Width of Icon */
+/*-------------------
+     Neutral Text
+--------------------*/
+/*-------------------
+     Brand Colors
+--------------------*/
+/*-------------------
+      Borders
+--------------------*/
+/*-------------------
+    Derived Values
+--------------------*/
+/* Loaders Position Offset */
+/* Rendered Scrollbar Width */
+/* Maximum Single Character Glyph Width, aka Capital "W" */
+/* Used to match floats with text */
+/* Header Spacing */
+/* Minimum Mobile Width */
+/* Positive / Negative Dupes */
+/* Responsive */
+/*-------------------
+  Exact Pixel Values
+--------------------*/
+/*
+  These are used to specify exact pixel values in em
+  for things like borders that remain constantly
+  sized as emSize adjusts
+
+  Since there are many more sizes than names for sizes,
+  these are named by their original pixel values.
+
+*/
+/* Columns */
+/*******************************
+             States
+*******************************/
+/*-------------------
+      Disabled
+--------------------*/
+/*-------------------
+        Hover
+--------------------*/
+/*---  Shadows  ---*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+        Focus
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+    Down (:active)
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+        Active
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+form.ui.small_form {
+  display: inline-block;
+  width: 400px;
+}
+html,
+body {
+  height: 100%;
+  font-family: 'proxima-nova';
+}
+body {
+  min-width: 320px;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+orange {
+  color: #F2711C;
+}
+.push {
+  min-height: 100%;
+  margin-bottom: -271px;
+}
+.ct {
+  text-align: center;
+}
+.va {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.fh {
+  height: 90vh;
+}
+.am {
+  margin: 0 auto;
+  width: 400px;
+}
+.hiden,
+.ui.hidden {
+  display: none;
+}
+.wrapper {
+  position: relative;
+}
+.wrapper.pad {
+  padding: 60px 0;
+}
+#header {
+  padding: 25px;
+  font-size: 2.5em;
+  font-weight: 300;
+}
+#header_logo {
+  display: inline-block;
+  font-family: 'funkydori';
+  color: #333;
+  margin-top: 10px;
+}
+#header_buttons {
+  display: inline-block;
+  float: right;
+}
+#header i.car {
+  margin: 0 10px;
+}
+.fouc {
+  opacity: 1;
+  transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -webkit-transition: opacity 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  -webkit-transition: -webkit-transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+.wf-loading .fouc {
+  opacity: 0;
+  transform: translateY(-20px);
+  -ms-transform: translateY(-20px);
+  -webkit-transform: translateY(-20px);
+}
+#logo {
+  font-size: 7em;
+  font-family: 'funkydori';
+  padding-bottom: 50px;
+}
+#landing_buttons {
+  marin-top: 55px;
+}
+#stream {
+  opacity: 0;
+  margin: 0 auto;
+}
+#new_pin_input {
+  margin-bottom: 50px;
+}
+#new_pin {
+  display: inline-block;
+  background-color: #FFF;
+  margin: 50px 0;
+  text-align: left;
+  display: none;
+}
+#new_pin .header {
+  line-height: 1em;
+}
+#new_pin .prices {
+  margin-top: 25px;
+}
+#new_pin_price_div {
+  display: none;
+  width: 500px;
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+#dragdeal {
+  margin: 20px 0;
+  border-radius: 3px;
+}
+#dragdeal .handle {
+  border-radius: 3px;
+}
+#save_pin_btn {
+  display: none;
+}
+.pin {
+  display: inline-block;
+  margin-bottom: 45px;
+  background-color: white;
+  text-align: left;
+}
+.pin .image img {
+  display: inline-block;
+}
+.pin .prices {
+  padding-top: 15px;
+}
+.pulse {
+  box-shadow: 0 0 0 rgba(204, 169, 44, 0.4);
+  -webkit-animation: pulse 2s infinite;
+  animation: pulse 2s infinite;
+  border-radius: 3px;
+}
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+  }
+}
+
+/*# sourceMappingURL=master.css.map */
