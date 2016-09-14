@@ -4,7 +4,7 @@
 <meta name="Keywords" content="dog, breed, kennel, social, network, community, dog profiles, dog social, puppies" />	
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf_token" content="{!! csrf_token() !!}">
-
+<meta name="google-site-verification" content="c25pBN6FwndLuDM5sWhk2LxZ5Aaa9t6uNGIpqupVuUY" />
 
 <title>
 @if (isset($pageTitle))
