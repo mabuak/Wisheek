@@ -60,7 +60,7 @@ class Scrape extends Command
 
             if ($pin->want_price <= $price){
                 $user = DB::table('users')->find($pin->user_id);
-                Notification::send($user, new PriceNotification($pin));
+                //Notification::send($user, new PriceNotification($pin));
             }     
         } 
 
