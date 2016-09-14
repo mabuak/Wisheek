@@ -7,10 +7,16 @@ use App\Repositories\Contracts\UserRepositoryContract;
 use App\Services\Contracts\RegisterServiceContract;
 use App\Services\Contracts\MailServiceContract;
 
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\WelcomeNotification;
+
 use Hash;
 use Auth;
+use Notification;
 
 class RegisterService implements RegisterServiceContract{
+
+  use Notifiable;
 
   protected $userRepository;
   protected $albumRepository;
@@ -44,7 +50,7 @@ class RegisterService implements RegisterServiceContract{
 
 
       // send the welcome mail
-      $this->mailService->sendWelcome($emaildata);
+      $this->sendWelcomeEmail();
 
       // login user right after registration
       Auth::login($user, true);
@@ -56,5 +62,11 @@ class RegisterService implements RegisterServiceContract{
   {
     $extProfile = $this->extProfileRepository->create($data);
   }
+ 
+  public function sendWelcomeEmail()
+    {
+      $user = $this->userRepository->getOneWhere('email','gtorch@gmail.com');
+      Notification::send($user, new WelcomeNotification($user));
+    }
  
 }

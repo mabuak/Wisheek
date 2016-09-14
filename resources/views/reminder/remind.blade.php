@@ -3,20 +3,9 @@
 
 @include('includes.header')
 
-<div class="wrapper">
-
-  <div id="landing_header"> 
-
-    <a href="/" class="fouc" id="landing_logo">Nice<orange>Price</orange></a> 
-
-    <div id="header_buttons">
-      <a class="ui tiny blue button" href="/login">Login</a> 
-      <a class="ui tiny orange button" href="/register">Register</a>
-    </div>
-  </div>
-<div class="container fh vc ct">
-
+<div class="container fh ct">
 <div class="am">
+
     
     @if (session('status'))
 
@@ -59,7 +48,6 @@
 
     @endif
 </div> <!-- /container -->
-</div>
 </div>
 
 @stop

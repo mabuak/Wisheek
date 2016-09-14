@@ -17,6 +17,7 @@ Route::get('/',['uses' => 'HomeController@index', 'as' => 'home.home']);
 Route::get('/register', ['uses' => 'RegisterController@getRegister', 'as' => 'register.getRegister']);
 Route::get('/register/code', ['uses' => 'RegisterController@getCode', 'as' => 'register.code']);
 Route::post('/register', ['uses' => 'RegisterController@postRegister', 'as' => 'register.postRegister']);
+Route::get('/welcome', ['uses' => 'RegisterController@sendWelcomeEmail']);
 
 // Auth
 Route::get('/login', ['uses' => 'AuthController@getLogin', 'as' => 'auth.getLogin']);
@@ -32,7 +33,7 @@ Route::post('password/email', ['uses'=>'ReminderController@postEmail','as'=>'rem
 
 // Password reset routes...
 Route::get('password/reset/{token}', 'ReminderController@getReset');
-Route::post('password/reset', 'ReminderController@postReset');
+Route::post('password/reset/{token}', 'ReminderController@postReset');
 
 //Users
 Route::post('/welcome/disable', array('uses' =>'UserController@disableWelcome'));

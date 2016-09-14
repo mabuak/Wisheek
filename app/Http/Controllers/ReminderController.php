@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\Contracts\ReminderServiceContract;
-use Illuminate\Contracts\Auth\PasswordBroker;
 use App\Http\Requests\CodeRequest;
 use App\Http\Requests\ReminderRequest;
 use App\Http\Requests\ResetRequest;
@@ -47,10 +46,10 @@ class ReminderController extends Controller {
 
     switch ($response)
     {
-      case PasswordBroker::RESET_LINK_SENT:
+      case 0:
         return redirect()->back()->with('status', trans($response));
 
-      case PasswordBroker::INVALID_USER:
+      case 1:
         return redirect()->back()->withErrors(['email' => trans($response)]);
     }
 	}
@@ -85,7 +84,12 @@ class ReminderController extends Controller {
       'email', 'password', 'password_confirmation', 'token'
     );
 
-    $email = Token::where('token','=', $request->get('token'))->first()->email;
+    $email = Token::where('token','=', $request->get('token'))->first();
+    
+    if($email) {
+      $email = $email->email;
+    }
+
     $credentials['email'] = $email;
 
     $response = $this->reminderService->reset($credentials);
@@ -93,7 +97,7 @@ class ReminderController extends Controller {
     switch ($response)
     {
       case PasswordBroker::PASSWORD_RESET:
-        return redirect()->back()->with('status','');;
+        return view('reminder/success');
 
       default:
         return redirect()->back()->withErrors(['email' => trans($response)]);

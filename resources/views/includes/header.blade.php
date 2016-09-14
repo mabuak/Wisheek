@@ -8,6 +8,7 @@
       <a class="ui tiny red button" href="/logout">Logout</a> 
     </div>
 @else
+    <a href="/" class="fouc" id="header_logo">Wisheek</a> 
 
   <div id="header_buttons">
       <a class="ui tiny blue button" href="/login">Login</a> 

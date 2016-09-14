@@ -57,5 +57,10 @@ class RegisterController extends Controller {
       
   		return redirect('/');
    }
+
+    public function sendWelcomeEmail()
+    { 
+      return $this->registerService->sendWelcomeEmail();
+    }
  
 }
