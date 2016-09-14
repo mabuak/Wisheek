@@ -44,3 +44,4 @@ Route::post('/scrape', array('uses' =>'ScrapeController@scrape'));
 //Pins
 Route::resource('pin', 'PinController');
 Route::get('pin/{hash}', ['uses'=>'PinController@show','as'=>'pin.show']);
+Route::get('pin/{hash}/edit', ['uses'=>'PinController@edit','as'=>'pin.edit']);

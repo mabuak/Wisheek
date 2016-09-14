@@ -31,6 +31,7 @@ class User extends Authenticatable
         $this->notify(new ReminderNotification($token));
     }
 
+
     public function pins() {
         return $this->hasMany('App\Pin');
     }

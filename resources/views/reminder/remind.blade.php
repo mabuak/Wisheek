@@ -26,7 +26,7 @@
     {!! Form::open([
         "route"        => "remind.postEmail",
         "autocomplete" => "off",
-        "class" => "ui larhge form segment small_form",
+        "class" => "ui large form segment small_form",
     ]) !!}
 
 

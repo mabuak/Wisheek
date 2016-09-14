@@ -26,7 +26,7 @@
     @endif
 
     {!! Form::open([
-        "class" => "ui huge form segment small_form",
+        "class" => "ui large form segment small_form",
     ]) !!}
 
     {!! Form::hidden('token',$token) !!}

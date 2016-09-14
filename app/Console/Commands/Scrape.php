@@ -3,13 +3,22 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Notifications\PriceNotification;
+use Illuminate\Notifications\Notifiable;
 
 use Goutte;
 use App\Pin;
+use App\User;
+
 use DB;
+
+use Notification;
 
 class Scrape extends Command
 {
+
+    use Notifiable;
+
     /**
      * The name and signature of the console command.
      *
@@ -43,10 +52,16 @@ class Scrape extends Command
     {
         $ids = DB::table('pins')->pluck('id');
         foreach ($ids as $id) {
-            $url = DB::table('pins')->where('id',$id)->value('url');
+            $pin = DB::table('pins')->find($id);
+            $url = $pin->url;
             $crawler = Goutte::request('GET', $url);  
-            $price = filter_var($crawler->filter('#prix, .price')->text(),FILTER_SANITIZE_NUMBER_INT);
-            DB::table('pins')->where('id',$id)->update(['actual_price'=>$price]);
+            $price = filter_var($crawler->filter('#prix, #main .price')->first()->text(),FILTER_SANITIZE_NUMBER_INT);
+            DB::table('pins')->where('id',$id)->update(['actual_price'=>$price]);   
+
+            if ($pin->want_price <= $price){
+                $user = DB::table('users')->find($pin->user_id);
+                Notification::send($user, new PriceNotification($pin));
+            }     
         } 
 
     }

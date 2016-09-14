@@ -14,7 +14,6 @@ $.ajaxSetup({
 
 $(document).ready(function(){
 	 new Dragdealer('dragdeal');
-
 })
 
 $('#new_pin_btn').click(function(){
@@ -146,4 +145,39 @@ $(document).on('click','.delete_pin', function(e){
 			});
     	}
     }).modal('show');
+})
+
+$('.pin .image').dimmer({
+on: 'hover'
+});
+
+if ($('body').attr('id')=='editpin'){
+	$('document').ready(function(){
+	$pin = $('.pin');
+	$price = $pin.data('price')
+	new Dragdealer('dragdeal', {
+	  x: 0.75,
+	  animationCallback: function(x, y) {
+	    $('.pin .want_price').find('.label').html(Math.round((x*$price)));
+	    $('#dragdeal .handle').html(Math.round((x*$price)));
+	    $pin.data('want_price', Math.round(x*$price));
+	  }
+	});
+	})
+}
+
+$(document).on('click','.save_edit_pin_btn',function(){
+	$button = $(this);
+	$pin = $button.parentsUntil('.pin').parent();
+
+	$.ajax({
+		'method': 'PUT',
+		'url' : '/pin/'+$pin.data('id'),
+		'data': { 
+			want_price: $pin.data('want_price'),
+		},
+		'success': function(){
+			window.location.replace('/');
+		}
+	});
 })
