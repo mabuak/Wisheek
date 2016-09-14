@@ -25,7 +25,6 @@ class ScrapeController extends Controller {
     public function scrape(Request $request)
     {
       $data = $this->scrapeService->scrape($request->get('url'));
-
       return view('pins/pinset',$data)->render();
     }
 

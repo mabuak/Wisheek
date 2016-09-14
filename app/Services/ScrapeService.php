@@ -76,7 +76,7 @@ class ScrapeService implements ScrapeServiceContract{
 
       $pin['hash'] = $hash;
 
-      if ($height > 100) array_push($pins, $pin);
+      if ($height > 150) array_push($pins, $pin);
     }
 
     $data['pins'] = $pins;

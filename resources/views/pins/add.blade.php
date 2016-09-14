@@ -23,7 +23,7 @@
 	</div>
 </div>
 
-<ul class="special cards" id="new_pins">
+<ul class="pins grid special cards" id="new_pins">
 
 </ul>
 

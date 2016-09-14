@@ -27,22 +27,32 @@ $('#new_pin_btn').click(function(){
 	};
 
 	$input.css('backgroundColor','#FFF');
+	$('#new_pins').hide();
+	$('#new_pin_price_div').hide();
+
 
 	$('.loader').addClass('active');
+	$('#new_pins').masonry('destroy');
 
 	$.ajax({
 		'method': 'POST',
 		'url' : '/scrape/',
 		'data': { url: $input.val()},
 		'success' : function (response){
-
 			$('#new_pin .card').dimmer('hide');
 
-			$('#new_pins').hide().html(response).fadeIn();
-
+			$('#new_pins').html($(response)).fadeIn();
+			$('#new_pins').imagesLoaded(function() {
+				$('#new_pins').masonry({
+					columnWidth: 320,
+    				gutter: 45,
+					itemSelector : '.pin',
+    				isFitWidth: true,
+				});
+			});
 			
 			$pin = $('.new.pin')
-			$price = $('.new.pin').find('.price').children('.label').text();
+			$price = $('.new.pin').find('.price').children('.label').first().text();
 	
 
 			$('.loader').removeClass('active');
@@ -53,7 +63,7 @@ $('#new_pin_btn').click(function(){
 			
 			$('#new_pin_price_div').css('display','inline-block');
 		    $('#dragdeal .handle').html(Math.round((0.75*$price)));
-		    $pin.data('want_price', 0.75*$price);
+		    $pin.data('want_price', Math.round(0.75*$price));
 
 			new Dragdealer('dragdeal', {
 		      x: 0.75,
@@ -62,7 +72,7 @@ $('#new_pin_btn').click(function(){
 		      animationCallback: function(x, y) {
 		        $('.new.pin .want_price').find('.label').html(Math.round((x*$price)));
 		        $('#dragdeal .handle').html(Math.round((x*$price)));
-		        $pin.data('want_price', x*$price);
+		        $pin.data('want_price', Math.round(x*$price));
 
 		      },
 		      callback: function(x, y){
@@ -102,7 +112,6 @@ $(document).on('click','.save_pin_btn',function(){
 // init the masonry on posts
 $(window).imagesLoaded(function(){
 	setTimeout(function(){
-	$('#status_stream_load').hide();
 	$('#stream').masonry({
 		// options
 		columnWidth: 320,
