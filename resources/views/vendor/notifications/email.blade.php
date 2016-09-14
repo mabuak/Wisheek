@@ -71,7 +71,7 @@ $style = [
                     <tr>
                         <td style="{{ $style['email-masthead'] }}">
                             <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
-                                <img src="{{ $message->embed('img/logo.png') }}">
+                                <img src="{{ $message->embed(public_path('img/logo.png')) }}">
                             </a>
                         </td>
                     </tr>
@@ -98,7 +98,11 @@ $style = [
                                         <!-- Intro -->
                                         @foreach ($introLines as $line)
                                             <p style="{{ $style['paragraph'] }}">
+                                                @if (strpos($line,'jpg')!==false)
+                                                    <img src="{{ $message->embed($line) }}">
+                                                @else
                                                 {{ $line }}
+                                                @endif
                                             </p>
                                         @endforeach
 

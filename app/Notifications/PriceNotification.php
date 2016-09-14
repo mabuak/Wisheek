@@ -16,11 +16,11 @@ class PriceNotification extends Notification
      *
      * @return void
      */
-    protected $token; 
+    protected $pin; 
 
-    public function __construct($token)
+    public function __construct($pin)
     {
-        $this->token=$token;
+        $this->pin=$pin;
     }
 
     /**
@@ -31,7 +31,7 @@ class PriceNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -43,10 +43,11 @@ class PriceNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Wisheek password reset')
-                    ->greeting('You are receiving this email because we received a password reset request for your account.')
-                    ->line('Click the button to rest your password')
-                    ->action('Reset password', env('APP_URL').'/password/reset/'.$this->token)
+                    ->subject('Price alert!')
+                    ->greeting('Pin you saved on Wisheek is below your wished price!')
+                    ->line($this->pin->image)
+                    ->line('Click the button to visit the online store')
+                    ->action('Go to shop', $this->pin->url)
                     ->line('Thank you for using our application!');
     }
 
@@ -56,10 +57,11 @@ class PriceNotification extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toDatabase($notifiable)
     {
         return [
-            //
+            'price' => $this->pin->actual_price,
+            'pin_id' => $this->pin->id
         ];
     }
 }
