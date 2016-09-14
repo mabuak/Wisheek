@@ -32,14 +32,22 @@
 		      	<span class="date">{!! DateHelper::timeago($pin->created_at) !!} ago</span>
 		    </div>
 
-			<div class="prices">
-				<div class="price">Original price<div class="ui tag blue right floated label">{!!$pin->price!!}</div></div><br/>
-				<div class="want_price">Wish Price<div class="ui tag green right floated label">{!!$pin->want_price!!}</div></div><br/>
-				<div class="actual_price">Actual price
+			<div class="ui divided list prices">
+				<div class="item price">
+					<span>Original price</span>
+					<div class="ui blue horizontal right floated label">{!!$pin->price!!}</div>
+				</div>
+
+				<div class="item want_price">
+					<span>Wish Price</span>
+					<div class="ui green horizontal right floated label">{!!$pin->want_price!!}</div>
+				</div>
+				<div class="item actual_price">
+					<span>Actual price</span>
 					@if (isset($pin->actual_price)) 
-					<div class="ui tag teal right floated label">@if (isset($pin->actual_price)) {!!$pin->actual_price!!} @else Loading @endif</div><br/>
+					<div class="ui horizontal teal right floated label">@if (isset($pin->actual_price)) {!!$pin->actual_price!!} @else Loading @endif</div>
 					@else
-					<div class="ui tag disabled right floated label">@if (isset($pin->actual_price)) {!!$pin->actual_price!!} @else Loading ... @endif</div><br/>
+					<div class="ui horizontal disabled right floated label">@if (isset($pin->actual_price)) {!!$pin->actual_price!!} @else Loading ... @endif</div>
 					@endif
 				</div>
 			</div>

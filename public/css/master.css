@@ -311,8 +311,11 @@ orange {
 .pin .image img {
   display: inline-block;
 }
-.pin .prices {
-  padding-top: 15px;
+.pin .prices .item {
+  padding: 10px 0;
+}
+.pin .prices .item .label {
+  margin-top: -3px;
 }
 .pulse {
   box-shadow: 0 0 0 rgba(204, 169, 44, 0.4);
