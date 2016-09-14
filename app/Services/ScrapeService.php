@@ -51,7 +51,7 @@ class ScrapeService implements ScrapeServiceContract{
                       ->reduce(function ($node, $i) {
 
 
-                      return strpos($node->attr('src'),'logo') == false && strpos($node->attr('src'),'http') !==false;
+                        return strpos($node->attr('src'),'logo') == false && strpos($node->attr('src'),'http') !==false && $node->attr('height')>150;
 
 
                     })->each(function ($node, $i) {
@@ -62,9 +62,7 @@ class ScrapeService implements ScrapeServiceContract{
 
     foreach ($images as $i=>$image){
 
-      $imageI = Image::make($image);
-      $height = $imageI->height();
-
+  
       $pin['price'] = $price;
       $pin['title'] = $title;
       $pin['store'] = $store;
@@ -76,7 +74,7 @@ class ScrapeService implements ScrapeServiceContract{
 
       $pin['hash'] = $hash;
 
-      if ($height > 150) array_push($pins, $pin);
+      array_push($pins, $pin);
     }
 
     $data['pins'] = $pins;

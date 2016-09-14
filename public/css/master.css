@@ -280,6 +280,9 @@ orange {
   opacity: 0;
   margin: 0 auto;
 }
+#new_pins {
+  margin: 0 auto;
+}
 #new_pin_input {
   margin-bottom: 50px;
 }
