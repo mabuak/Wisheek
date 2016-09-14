@@ -40,7 +40,6 @@ class WelcomeNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        dd($this);
         return (new MailMessage)
                     ->subject('Welcome to Wisheek')
                     ->greeting('Hello '.$notifiable->first_name.'!')
