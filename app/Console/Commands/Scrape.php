@@ -54,7 +54,7 @@ class Scrape extends Command
             $price = filter_var($crawler->filter('#prix, #main .price')->first()->text(),FILTER_SANITIZE_NUMBER_INT);
             DB::table('pins')->where('id',$id)->update(['actual_price'=>$price]);   
 
-            if ($pin->want_price <= $price){
+            if ($pin->want_price >= $price){
                 $user = User::find($pin->user_id);
                 $cole = $user->notifications->pluck('data');
                 foreach ($cole as $col){
