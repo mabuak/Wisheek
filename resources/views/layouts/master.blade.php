@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-   
     @include('includes.head')
 
     <body id="@if (isset($bodyname)){!!$bodyname!!}@endif" data-segment="@if(isset($segment)){!!$segment!!}@endif" data-id="@if(Auth::check()){!!Auth::user()->id!!}@endif" data->
