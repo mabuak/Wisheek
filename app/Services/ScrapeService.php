@@ -49,12 +49,12 @@ class ScrapeService implements ScrapeServiceContract{
     $page =  $response->getContent();
 
     $crawler = new Crawler($page);
-
     $price = $crawler->filterXPath('//*[ancestor::*[contains(@id, "content") or contains(@id, "fiche") or contains(@id, "main")]]')
                    ->reduce(function ($node, $i) {
-                       return strpos($node->attr('id'),'price') || strpos($node->attr('class'),'price');    ;           
+                       return strpos($node->attr('id'),'price') >=0 || strpos($node->attr('class'),'price') >=0|| strpos($node->attr('class'),'prix') >=0|| strpos($node->attr('id'),'prix') >=0;             
                     })
                    ->first()->text();
+
     $price = filter_var($price,FILTER_SANITIZE_NUMBER_INT);
     $price = rtrim($price, '-');
 
@@ -65,19 +65,18 @@ class ScrapeService implements ScrapeServiceContract{
                    ->text();
 
     $store = parse_url($url)['host'];
-
+ 
     $images = $crawler->filter('img')
                       ->filterXPath('//img[ancestor::*[contains(@id, "content") or contains(@id, "fiche") or contains(@id, "main")]]')
                       ->reduce(function ($node, $i) {
 
 
-                        return strpos($node->attr('src'),'logo') == false && ($node->attr('height')>150 || $node->attr('height')==null) && $node->attr('src') && strpos($node->attr('src'),'blank')===false;
+                        return strpos($node->attr('src'),'logo') == false && ($node->attr('height')>150 || $node->attr('height')==null) && $node->attr('src') && strpos($node->attr('src'),'blank')==false;
 
 
                     })->each(function ($node, $i) {
                       return $node->attr('src');
                     });
-
     $pins = []; 
 
     foreach ($images as $i=>$image){
