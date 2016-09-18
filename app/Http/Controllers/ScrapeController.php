@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Contracts\ScrapeServiceContract;
 
 use Illuminate\Http\Request;
+use JonnyW\PhantomJs\Client;
 
 class ScrapeController extends Controller {
 	
@@ -25,7 +26,7 @@ class ScrapeController extends Controller {
     public function scrape(Request $request)
     {
       $data = $this->scrapeService->scrape($request->get('url'));
-      return view('pins/pinset',$data)->render();
+      return view('pins/pinset',$data);
     }
 
     public function run()
