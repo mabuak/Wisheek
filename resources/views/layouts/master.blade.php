@@ -22,7 +22,7 @@
    }(document, 'script', 'facebook-jssdk'));
 </script>
 
-        <div class="push">
+      <div class="push">
 			@yield('content')
   		</div>
 
