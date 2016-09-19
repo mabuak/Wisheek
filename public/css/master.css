@@ -351,6 +351,9 @@ orange {
 .pin .prices .item .label {
   margin-top: -3px;
 }
+#confirm_modal .actions {
+  text-align: center;
+}
 .pulse {
   box-shadow: 0 0 0 rgba(204, 169, 44, 0.4);
   -webkit-animation: pulse 2s infinite;
