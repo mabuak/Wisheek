@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="teal wrapper">
+<div class="teal cover wrapper">
 
 <div id="landing_buttons">
 	<a class="ui blue button" href="/login">Login</a> 

@@ -51,7 +51,7 @@ class ScrapeService implements ScrapeServiceContract{
     $crawler = new Crawler($page);
     $price = $crawler->filterXPath('//*[ancestor::*[contains(@id, "content") or contains(@id, "fiche") or contains(@id, "main")]]')
                    ->reduce(function ($node, $i) {
-                       return strpos($node->attr('id'),'price') >=0 || strpos($node->attr('class'),'price') >=0|| strpos($node->attr('class'),'prix') >=0|| strpos($node->attr('id'),'prix') >=0;             
+                       return strpos($node->attr('id'),'price') >=0 || strpos($node->attr('class'),'price') >=0|| strpos($node->attr('class'),'prix') >=0|| strpos($node->attr('id'),'prix') >=0 || strpos($node->attr('itemprop'),'price') >=0 || strpos($node->attr('class'),'price') >=0|| strpos($node->attr('class'),'prix') >=0|| strpos($node->attr('id'),'prix') >=0 ;             
                     })
                    ->first()->text();
 
@@ -103,7 +103,6 @@ class ScrapeService implements ScrapeServiceContract{
 
     $data['pins'] = $pins;
     return $data;
-    return $page;
 
   }
  
