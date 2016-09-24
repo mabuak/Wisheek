@@ -24,6 +24,12 @@ class PinRepository extends BaseRepository implements PinRepositoryContract {
       $this->model = $model;
    }
 
+  public function getAllPins()
+  {
+    return $this->model->orderBy('created_at','desc')->paginate();
+  }
+  
+
   public function getStream($userid)
   {
     return $this->model->where('user_id', $userid)->orderBy('created_at','desc')->paginate();

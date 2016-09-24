@@ -50,6 +50,9 @@ class PinService implements PinServiceContract {
 
  public function stream() 
   {
+    if (Auth::user()->admin){
+      $stream = $this->pin->getALlPins();
+    } 
     $stream = $this->pin->getStream(Auth::user()->id);
     
     return $stream;
