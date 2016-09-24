@@ -400,14 +400,14 @@ orange {
 }
 #footer_left {
   display: inline-block;
-  width: 300px;
+}
+#footer_left span {
+  margin-left: 30px;
+  color: #999;
 }
 #footer_right {
   float: right;
-}
-#footer_right span {
-  margin-left: 30px;
-  color: #999;
+  width: 300px;
 }
 #all_r_r {
   color: #AAA;

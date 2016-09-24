@@ -25,7 +25,7 @@
 <div class="gray wrapper">
 <div class="fouc container">
 
-<div id="info_div" class="ui four column center aligned grid">
+<div id="info_div" class="ui four column center aligned doubling stackable grid">
 
  <div class="four wide column">
  	<i class="icon massive bullseye"></i>

@@ -17,7 +17,6 @@ Wisheek
 
 {!! HTML:: style('css/reset.css') !!}
 {!! HTML:: style('css/semantic.min.css') !!}
-{!! HTML:: style('css/responsive.css') !!}
 {!! HTML:: style('css/dragdealer.css') !!}
 {!! HTML:: style('css/master.css') !!}
 
@@ -26,6 +25,7 @@ Wisheek
 {!! HTML:: script('js/dragdealer.min.js') !!} 
 {!! HTML:: script('js/jquery.masonry.js') !!} 
 {!! HTML:: script('js/semantic.min.js') !!} 
+{!! HTML:: style('css/responsive.css') !!}
 
 <script>
   (function(d) {

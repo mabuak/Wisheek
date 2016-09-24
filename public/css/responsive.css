@@ -17,22 +17,12 @@
   }
 
 
-    #landing_box{
-      width:100%;
-    }
-
-    #landing_learn_btn{
-      display: none;
-    }
-
- 
-
-  #welcome_div img{
-    width:320px;
+  #slogan_1{
+    font-size: 2em;
   }
 
-  #welcome_header{
-    font-size: 2.5em;
+    #slogan_2{
+    font-size: 1.5em;
   }
 
    #main_search_form_item {
@@ -56,6 +46,28 @@
     font-size: 1.2em;
   }
 
+#wrapper_footer_top{  
+  padding-top: 40px;
+}
+
+  #footer_left{
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 0px;
+  }
+
+  #footer_left span{
+    display: block;
+    margin-left: 0px;
+  }
+
+  #footer_right{
+    text-align: center;
+    float: none;
+    width: 100%;
+  }
+
 }
 
 
@@ -65,17 +77,13 @@
     max-width: 555px;
   }
 
-   #main_search_form_item {
-    display: none;
+
+  #slogan_1{
+    font-size: 2em;
   }
 
-    #landing_learn_btn{
-      display: none;
-    }
-
-  #landing_header{
-  text-align: left;
-  padding-left: 5%;
+    #slogan_2{
+    font-size: 1.5em;
   }
 
 
@@ -104,6 +112,13 @@
     max-width: 555px;
   }
 
+  #slogan_1{
+    font-size: 2.5em;
+  }
+
+    #slogan_2{
+    font-size: 1.8em;
+  }
 
    #list.filter_visible{
       width:833px;
