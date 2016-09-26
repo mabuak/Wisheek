@@ -222,24 +222,6 @@ orange {
 .wrapper.pad {
   padding: 60px 0;
 }
-#header {
-  padding: 25px;
-  font-size: 2.5em;
-  font-weight: 300;
-}
-#header_logo {
-  display: inline-block;
-  font-family: 'funkydori';
-  color: #333;
-  margin-top: 10px;
-}
-#header_buttons {
-  display: inline-block;
-  float: right;
-}
-#header i.car {
-  margin: 0 10px;
-}
 .fouc {
   opacity: 1;
   transform: translateY(0);
@@ -257,6 +239,14 @@ orange {
   -ms-transform: translateY(-20px);
   -webkit-transform: translateY(-20px);
 }
+#landing_header {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 10px;
+  text-align: right;
+}
+#landing_header .label {
+  display: none;
+}
 #logo {
   font-size: 5.5em;
   font-family: 'funkydori';
@@ -273,7 +263,6 @@ orange {
   top: 50px;
 }
 .wrapper.teal {
-  border-top: 20px rgba(0, 0, 0, 0.6) solid;
   background-color: #00B5AD;
   padding: 80px 0 60px 0;
 }
@@ -396,7 +385,7 @@ orange {
 #wrapper_footer_top {
   height: 200px;
   padding-top: 90px;
-  background-color: #FFF;
+  background-color: rgba(0, 0, 0, 0.75);
 }
 #footer_left {
   display: inline-block;
@@ -442,6 +431,27 @@ orange {
   float: right;
 }
 #footer_langs span {
+  cursor: pointer;
+}
+#header {
+  padding: 25px;
+}
+#header_logo {
+  display: inline-block;
+  font-family: 'funkydori';
+  color: #333;
+  margin-top: 19px;
+  font-size: 2.4em;
+}
+#header_buttons {
+  display: inline-block;
+  float: right;
+}
+#header i.car {
+  margin: 0 10px;
+}
+#sidebar_handle {
+  color: #333;
   cursor: pointer;
 }
 

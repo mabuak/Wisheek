@@ -1,6 +1,6 @@
 <footer>
 
-
+ {{--
 	<div class="wrapper" id="wrapper_footer_top">
 		<div class="container">
 
@@ -19,6 +19,8 @@
 		</div>
 	</div>	
 
+  --}}
+  
 <!-- MODAL FOR POST DELETE -->
 <div class="ui small basic modal" id="confirm_modal">
     <div class="ui icon header">
@@ -39,6 +41,8 @@
       </div>
     </div>
   </div>
+
+
   
 {!! HTML:: script('js/app.js') !!}
 {!! HTML:: script('js/jquery.masonry.js') !!}

@@ -243,8 +243,8 @@ return [
 
     'main_selectors' => ['content','fiche','main'],
     'attributes' => ['id','class','itemprop'],
-    'price_best' => ['bigPrice','withVAT'],
-    'price_ok' => ['price','prix'],
+    'price_best' => ['bigPrice','withVAT','dph'],
+    'price_ok' => ['price','prix','cena'],
     'price_nok' => ['without','before','used','empty', 'Empty'],
 
 ];

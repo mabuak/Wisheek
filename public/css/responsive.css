@@ -16,39 +16,51 @@
     max-width: 400px;
   }
 
+  #landing_header .label{
+    display: inline-block;
+  }
 
   #slogan_1{
     font-size: 2em;
   }
 
-    #slogan_2{
+  #slogan_2{
     font-size: 1.5em;
   }
 
-   #main_search_form_item {
+  #logo{
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    display: inline-block;
+    padding-bottom: 10px;
+  }
+
+  #landing_buttons{
     display: none;
   }
 
-  #landing_header{
-  text-align: left;
-  padding-left: 5%;
+  .wrapper.gray{
+    padding: 50px 0;
   }
 
-  #header_logo{
-    display: none;
+  #info_div i.icon{
+    font-size: 5em;
+    margin-bottom: 10px;
   }
 
-  .landing_header{
-    font-size: 1.5em;
+  #info_div p{
+    font-size: 1.6em;
   }
+
+
 
   #landing_wrapper p{
     font-size: 1.2em;
   }
 
-#wrapper_footer_top{  
-  padding-top: 40px;
-}
+  #wrapper_footer_top{  
+    padding-top: 40px;
+  }
 
   #footer_left{
   display: block;
@@ -87,20 +99,12 @@
   }
 
 
-  #welcome_div img{
-    width:500px !important;
-  }
 
-  #welcome_header{
-    font-size: 4em;
-  }
-
-     #landing_wrapper p{
-    font-size: 1em;
-  }
-
-  .landing_header{
-    font-size: 1.4em;
+ #logo{
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    display: inline-block;
+    padding-bottom: 10px;
   }
 
 }

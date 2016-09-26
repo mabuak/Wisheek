@@ -1,12 +1,16 @@
 @extends('layouts.master')
 @section('content')
 
+<div id="landing_header">
+    <a class="ui label" href="/login">Login</a> 
+	<a class="ui label" href="/register">Register</a>
+</div>
 
 <div class="teal cover wrapper">
 
 <div id="landing_buttons">
-	<a class="ui blue button" href="/login">Login</a> 
-	<a class="ui orange button" href="/register">Register</a>
+	<a class="ui inverted button" href="/login">Login</a> 
+	<a class="ui inverted button" href="/register">Register</a>
 </div>
 
 

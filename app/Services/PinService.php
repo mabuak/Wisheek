@@ -22,11 +22,11 @@ class PinService implements PinServiceContract {
     $this->pin = $pinRepository;
   }
 
-  public function checkOwner($hash)
+  public function checkOwner($id)
   { 
-    $pin = $this->pin->getOneWhere('hash',$hash);
 
-    $check = $this->pin->getOneWhere('hash',$hash)->user->id == Auth::user()->id;
+    if (Auth::user()->admin) return true;
+    $check = $this->pin->get($id)->user->id == Auth::user()->id;
 
     if (!$check)
     {

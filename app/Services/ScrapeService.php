@@ -140,7 +140,7 @@ class ScrapeService implements ScrapeServiceContract{
    
       $pin['image'] = $image;
       if (strpos($pin['image'],'http') === false){
-        $pin['image'] = 'http//'.$pin['store'].$pin['image'];
+        $pin['image'] = 'http://'.$pin['store'].$pin['image'];
       }
 
       // generate the hash for the post

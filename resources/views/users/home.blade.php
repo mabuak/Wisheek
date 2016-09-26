@@ -2,6 +2,7 @@
 @section('content')
 @include('includes.header')
 
+@include('includes.sidebar')
 
 
 <div class="pad wrapper">
