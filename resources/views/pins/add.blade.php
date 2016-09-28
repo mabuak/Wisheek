@@ -3,16 +3,25 @@
 @include('includes.header')
 
 
-<div class="pad wrapper">
-<div class="container ct">
+<div class="pad teal2 wrapper">
+<div class="container">
 
 @include ('utils/errors')
 
-
-<div class="ui massive fluid action input" id="new_pin_input">
-    <input type="text" placeholder="Paste URL">
-    <div id="new_pin_btn" class="ui teal button">Search</div>
+<div class="fouc" id="new_pin_caption">
+Paste thr URL of your product, click search
 </div>
+
+<div class="ui massive fluid action input ct" id="new_pin_input">
+    <input type="text" placeholder="Paste URL">
+    <div id="new_pin_btn" class="ui grey button">Search</div>
+</div>
+
+</div>
+</div>
+
+<div class="pad wrapper">
+<div class="container ct">
 
 <div class="ui centered inline loader"></div>
 

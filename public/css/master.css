@@ -182,7 +182,8 @@
 /*---  Light Tones  ---*/
 form.ui.small_form {
   display: inline-block;
-  width: 400px;
+  width: 380px;
+  margin-top: 50px;
 }
 html,
 body {
@@ -191,7 +192,7 @@ body {
 }
 body {
   min-width: 320px;
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: #f7f7f7;
 }
 orange {
   color: #F2711C;
@@ -266,6 +267,9 @@ orange {
   background-color: #00B5AD;
   padding: 80px 0 60px 0;
 }
+.wrapper.teal2 {
+  background-color: #8ab4b5;
+}
 #slogan_1 {
   font-weight: 900;
   font-size: 4em;
@@ -307,7 +311,15 @@ orange {
   margin: 0 auto;
 }
 #new_pin_input {
-  margin-bottom: 50px;
+  margin: 25px 0;
+}
+#new_pin_input input {
+  border: 1px solid #FFF;
+}
+#new_pin_caption {
+  color: #EEE;
+  font-weight: 300;
+  font-size: 1.5em;
 }
 #new_pin_price_div {
   display: none;
@@ -434,25 +446,60 @@ orange {
   cursor: pointer;
 }
 #header {
-  padding: 25px;
+  display: table;
+  width: 100%;
+  background-color: #323131 ;
+  border-radius: 0px;
+}
+#header .item {
+  padding: 20px;
+  display: table-cell;
+}
+#header #left {
+  width: 140px;
+  display: table-cell;
+}
+#header #center {
+  width: auto;
+  text-align: center;
+  display: table-cell;
+}
+#header #right {
+  text-align: right;
+  display: table-cell;
+  width: 140px;
+}
+#sidebar_handle:hover {
+  background-color: #F59095;
 }
 #header_logo {
   display: inline-block;
   font-family: 'funkydori';
-  color: #333;
-  margin-top: 19px;
+  margin-top: 14px;
+  margin-bottom: -15px;
+  margin-left: 15px;
   font-size: 2.4em;
+  color: #FFF;
+  padding: 20px;
 }
-#header_buttons {
+#header_buttons a {
   display: inline-block;
-  float: right;
-}
-#header i.car {
-  margin: 0 10px;
+  color: #EEE;
 }
 #sidebar_handle {
-  color: #333;
   cursor: pointer;
+}
+#sidebar {
+  position: absolute;
+  background-color: #f7f7f7;
+  display: none;
+  z-index: 9999;
+}
+#leftbar {
+  display: inline-block;
+  margin-bottom: 45px;
+  width: 290px;
+  background-color: #FFF;
 }
 
 /*# sourceMappingURL=master.css.map */

@@ -1,29 +1,65 @@
 #header{
-  padding: 25px;
+  display: table;
+  width: 100%;
+  background-color: #323131 ;
+  border-radius: 0px;
+
+  .item{
+    padding: 20px;
+    display: table-cell;
+
+  }
+
+  #left{
+    width:140px;
+    display: table-cell;
+  }
+
+  #center{
+    width: auto;
+    text-align: center;
+    display: table-cell;
+  }
+
+
+  #right{
+    text-align: right;
+    display: table-cell;
+    width:140px;
+  }
 }
 
-
+#sidebar_handle:hover{
+  background-color: #F59095;
+}
 
 #header_logo{
   display: inline-block;
   font-family: 'funkydori';
-  color: #333;
-  margin-top: 19px;
+  margin-top: 14px;
+  margin-bottom: -15px;
+  margin-left: 15px;
   font-size: 2.4em;
+  color: #FFF;
+  padding: 20px;
+
 }
 
 #header_buttons{
-  display: inline-block;
-  float: right;
+  a{
+    display: inline-block;
+    color: #EEE;
+  }
 }
 
-
-
-#header i.car{
-	margin: 0 10px;
-}
 
 #sidebar_handle{
-  color: #333;
   cursor: pointer;
+}
+
+#sidebar{
+  position: absolute;
+  background-color: rgb(247, 247, 247);
+  display: none;
+  z-index: 9999;
 }

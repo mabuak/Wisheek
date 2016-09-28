@@ -8,7 +8,9 @@
 <div class="pad wrapper">
 <div class="stream_container">
 
-        @include('pins.stream')
+
+
+    @include('pins.stream')
 
 </div>
 </div>

@@ -21,7 +21,7 @@ $('#new_pin_btn').click(function(){
 	$errors = $('#errors').show();
 
 	if ($input.val()=='' || $input.val().indexOf("http")==-1) {
-		$input.css('backgroundColor','rgba(255,0,0,0.05)');
+		$input.css('backgroundColor','rgba(255,0,0,0.4)');
 		return false;
 	};
 
@@ -113,11 +113,12 @@ $(window).imagesLoaded(function(){
 	setTimeout(function(){
 	$('#stream').masonry({
 		// options
-		columnWidth: 320,
+		columnWidth: 290,
     gutter: 45,
 		itemSelector : '.pin',
     isFitWidth: true,
 		transitionDuration: '0s',
+		stamp: '#leftbar'
 	}).css('opacity','1');
 	$('.stream_container').find('.loader').hide();
 
@@ -182,4 +183,7 @@ $(document).on('click','.save_edit_pin_btn',function(){
 	});
 })
 
+$('#sidebar_handle').click(function(){
+	$('#sidebar').toggle();
+})
 //# sourceMappingURL=app.js.map
