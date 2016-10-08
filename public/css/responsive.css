@@ -195,6 +195,11 @@
       max-width:1440px;
   }
 
+    #logo{
+    margin-bottom: 30px;
+    display: inline-block;
+    padding-bottom: 20px;
+  }
 
 }
 
