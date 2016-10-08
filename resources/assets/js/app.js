@@ -108,22 +108,7 @@ $(document).on('click','.save_pin_btn',function(){
 	});
 })
 
-// init the masonry on posts
-$(window).imagesLoaded(function(){
-	setTimeout(function(){
-	$('#stream').masonry({
-		// options
-		columnWidth: 290,
-    gutter: 45,
-		itemSelector : '.pin',
-    isFitWidth: true,
-		transitionDuration: '0s',
-		stamp: '#leftbar'
-	}).css('opacity','1');
-	$('.stream_container').find('.loader').hide();
 
-	}, 500)
-});
 
 $('.special.cards .image').dimmer({
   on: 'hover'
@@ -148,9 +133,7 @@ $(document).on('click','.delete_pin', function(e){
     }).modal('show');
 })
 
-$('.pin .image').dimmer({
-on: 'hover'
-});
+
 
 if ($('body').attr('id')=='editpin'){
 	$('document').ready(function(){
@@ -185,4 +168,45 @@ $(document).on('click','.save_edit_pin_btn',function(){
 
 $('#sidebar_handle').click(function(){
 	$('#sidebar').toggle();
+});
+
+
+$('document').on('click','#filter_nice', function(){
+	$.ajax({
+		'url': 'pions'
+	})
+});
+
+
+
+///// PINS
+
+$('document').ready(function(){
+	$.ajax({
+		'url': 'pins/grid',
+		'success': function(data){
+			$('#stream').find('grid').html(data);
+
+			$('.pin .image').dimmer({
+				on: 'hover'
+			});
+
+			// init the masonry on posts
+			$(window).imagesLoaded(function(){
+				setTimeout(function(){
+				$('#stream').masonry({
+					// options
+					columnWidth: 290,
+			    gutter: 45,
+					itemSelector : '.pin',
+			    isFitWidth: true,
+					transitionDuration: '0s',
+					stamp: '#leftbar'
+				}).css('opacity','1');
+				$('.stream_container').find('.loader').hide();
+
+				}, 500)
+			});
+		}
+	})
 })

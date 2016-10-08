@@ -48,6 +48,12 @@ class PinService implements PinServiceContract {
     return $new;
   }
 
+   public function search($filters,$sortBy,$sortOrder,$paginate) 
+  {
+    return $this->pin->search($filters,$sortBy,$sortOrder,$paginate);
+  }
+
+
  public function stream() 
   {
     if (Auth::user()->admin){

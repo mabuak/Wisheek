@@ -51,8 +51,8 @@ class PinController extends Controller {
   public function edit($hash, Request $request)
   { 
 
-
-   $this->pinService->checkOwner($hash);
+   $pin = $this->pinService->get($hash)['pin'];
+   $this->pinService->checkOwner($pin->id);
     return $this->show($hash, $request);
   }
 
@@ -100,6 +100,43 @@ class PinController extends Controller {
     return 1;
   }
 
+
+  // function for sorting and filtering dogs in JSON
+  public function grid(Request $request) 
+  {
+
+    $result = $this->search($request);
+
+    $data = [
+      'stream' => $result['results'],
+      'filters' => $result['filters'],
+      'sortBy' => $result['sortBy'],
+      'sortOrder' => $result['sortOrder']
+    ];
+
+    return view('pins/grid', $data)->render();
+  }
+
+
+
+  // function for sorting and filtering dogs in JSON
+  public function search(Request $request) 
+  {
+    If ($request->has('sortBy')) {$sortBy=$request->get('sortBy');} else {$sortBy='name';}
+    If ($request->has('sortOrder')) {$sortOrder=$request->get('sortOrder');} else {$sortOrder='asc';}
+    $filters=json_decode($request->get('filters'),true);
+    $paginate=$request->get('paginate');
+
+    $data = [
+      'results' => $this->pinService->search($filters,$sortBy,$sortOrder,$paginate),
+      'filters' => $filters,
+      'sortBy' => $sortBy,
+      'sortOrder' => $sortOrder
+    ];
+
+    return $data;
+
+  }
 
  
 

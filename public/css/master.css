@@ -262,6 +262,7 @@ orange {
   position: absolute;
   right: 50px;
   top: 50px;
+  z-index: 99999;
 }
 .wrapper.teal {
   background-color: #00B5AD;

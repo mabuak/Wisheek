@@ -42,4 +42,12 @@ class PinRepository extends BaseRepository implements PinRepositoryContract {
     return $userid = $pin->user->id;
    }
 
+public function search($filters,$sortBy,$sortOrder,$paginate=1)
+  { 
+
+       return $this->model->orderBy('created_at','desc')->paginate();
+
+    
+   }
+
 }

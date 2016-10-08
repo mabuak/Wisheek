@@ -3,38 +3,14 @@
 
 <ul class="pins grid special cards" id="stream">
 
-	<div id="leftbar">
-	<div class="ui fluid vertical menu">
-  <a class="teal item">
-    All product pins
-    <div class="ui teal label">{!!$stream->count()!!}</div>
-  </a>
-  <a class="item">
-    Nice price product pins
-    @if ($stream->where('actual_price','<=','wish_price')->count() > 0)
-    <div class="ui green label">{!!$stream->where('actual_price','<=','wish_price')->count()!!}</div>
-    @endif
-  </a>
-  
-  <div class="item">
-    <div class="ui transparent icon input">
-      <input type="text" placeholder="Search pins...">
-      <i class="search icon"></i>
-    </div>
-  </div>
-</div>
+@include('pins/filters')
 
-	</div>
-	
-@foreach ($stream as $key=>$pin)
-	@include('pins.pin')
-@endforeach
+<grid>
+
+</grid>
 
 </ul>
 
-<div class="paginate hiden">
-{!! $stream->render() !!}
-</div>
 
 @if ($stream->lastPage()>1)
 <div class="ct">
