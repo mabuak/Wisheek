@@ -23,7 +23,7 @@
 	<li class=" ct" id="no_assets_div">
 
 			<i class="massive frown icon"></i>
-			<h1 class="ui header">No dogs found</h1>
+			<h1 class="ui header">No pins found</h1>
 
 	</li>
 

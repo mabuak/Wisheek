@@ -45,7 +45,23 @@ class PinRepository extends BaseRepository implements PinRepositoryContract {
 public function search($filters,$sortBy,$sortOrder,$paginate=1)
   { 
 
-       return $this->model->orderBy('created_at','desc')->paginate();
+       return $this->model->where(function($query) use ($filters,$sortBy,$sortOrder){
+
+        foreach ((array)$filters as $key=>$temp){
+          if ($filters[$key])
+          {
+            if ($key=='nice')
+            {   
+              $query->whereColumn("want_price", ">=", "actual_price");
+            }
+            if ($key=='search')
+            {
+              $query->whereRaw("title like '%".$filters[$key]['item0']."%'");
+            }
+
+          }
+        }
+    })->orderBy($sortBy,$sortOrder)->paginate();
 
     
    }

@@ -122,8 +122,8 @@ class PinController extends Controller {
   // function for sorting and filtering dogs in JSON
   public function search(Request $request) 
   {
-    If ($request->has('sortBy')) {$sortBy=$request->get('sortBy');} else {$sortBy='name';}
-    If ($request->has('sortOrder')) {$sortOrder=$request->get('sortOrder');} else {$sortOrder='asc';}
+    If ($request->has('sortBy')) {$sortBy=$request->get('sortBy');} else {$sortBy='created_at';}
+    If ($request->has('sortOrder')) {$sortOrder=$request->get('sortOrder');} else {$sortOrder='desc';}
     $filters=json_decode($request->get('filters'),true);
     $paginate=$request->get('paginate');
 

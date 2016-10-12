@@ -269,7 +269,7 @@ orange {
   padding: 80px 0 60px 0;
 }
 .wrapper.teal2 {
-  background-color: #8ab4b5;
+  background-color: #00B5AD;
 }
 #slogan_1 {
   font-weight: 900;
@@ -298,6 +298,7 @@ orange {
   font-weight: 300;
 }
 #no_pins_div {
+  margin-top: 50px;
   font-size: 5em;
   font-weight: 100;
 }
@@ -307,6 +308,9 @@ orange {
 #stream {
   opacity: 0;
   margin: 0 auto;
+}
+#active_filters {
+  margin-bottom: 30px;
 }
 #new_pins {
   margin: 0 auto;
@@ -352,6 +356,17 @@ orange {
 }
 .pin .prices .item .label {
   margin-top: -3px;
+}
+#filters {
+  display: inline-block;
+  margin-bottom: 45px;
+  width: 290px;
+  background-color: #FFF;
+}
+#filters .active.item {
+  background-color: #00B5AD;
+  color: #FFF;
+  font-weight: 900;
 }
 #confirm_modal .actions {
   text-align: center;
@@ -453,7 +468,7 @@ orange {
   border-radius: 0px;
 }
 #header .item {
-  padding: 20px;
+  padding: 16px;
   display: table-cell;
 }
 #header #left {
@@ -481,7 +496,7 @@ orange {
   margin-left: 15px;
   font-size: 2.4em;
   color: #FFF;
-  padding: 20px;
+  padding: 16px;
 }
 #header_buttons a {
   display: inline-block;
@@ -495,12 +510,6 @@ orange {
   background-color: #f7f7f7;
   display: none;
   z-index: 9999;
-}
-#leftbar {
-  display: inline-block;
-  margin-bottom: 45px;
-  width: 290px;
-  background-color: #FFF;
 }
 
 /*# sourceMappingURL=master.css.map */

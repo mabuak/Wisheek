@@ -9,7 +9,7 @@
 @include ('utils/errors')
 
 <div class="fouc" id="new_pin_caption">
-Paste thr URL of your product, click search
+Paste the URL of your product, click search
 </div>
 
 <div class="ui massive fluid action input ct" id="new_pin_input">

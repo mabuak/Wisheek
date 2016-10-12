@@ -5,11 +5,13 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Notifications\PriceNotification;
 
-use Goutte;
 use App\Pin;
 use App\User;
 
 use DB;
+
+use App\Services\Contracts\ScrapeServiceContract;
+
 
 class Scrape extends Command
 {
@@ -33,9 +35,11 @@ class Scrape extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ScrapeServiceContract $scrapeService)
     {
         parent::__construct();
+        $this->scrape = $scrapeService;
+
     }
 
     /**
@@ -50,8 +54,9 @@ class Scrape extends Command
         foreach ($ids as $id) {
             $pin = Pin::find($id);
             $url = $pin->url;
-            $crawler = Goutte::request('GET', $url);  
-            $price = filter_var($crawler->filter('#prix, #main .price')->first()->text(),FILTER_SANITIZE_NUMBER_INT);
+
+            $price = $this->scrape->scrapePrice($url);
+            $this->info($price);
             DB::table('pins')->where('id',$id)->update(['actual_price'=>$price]);   
 
             if ($pin->want_price >= $price){

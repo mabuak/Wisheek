@@ -96,6 +96,7 @@ $(document).on('click','.save_pin_btn',function(){
 		'data': { 
 			title: $pin.find('.header').text(),
 			price: $pin.data('price'),
+			actual_price: $pin.data('price'),
 			want_price: $pin.data('want_price'),
 			image: $pin.data('image'),
 			store: $pin.data('store'),
@@ -177,15 +178,10 @@ $('document').on('click','#filter_nice', function(){
 	})
 });
 
+function reloadPins(data){
+	$('#stream').find('grid').html(data);
 
-
-///// PINS
-
-$('document').ready(function(){
-	$.ajax({
-		'url': 'pins/grid',
-		'success': function(data){
-			$('#stream').find('grid').html(data);
+			$grid = $('#stream').find('grid');
 
 			$('.pin .image').dimmer({
 				on: 'hover'
@@ -194,19 +190,188 @@ $('document').ready(function(){
 			// init the masonry on posts
 			$(window).imagesLoaded(function(){
 				setTimeout(function(){
+				$('#stream').masonry('destroy');
 				$('#stream').masonry({
 					// options
 					columnWidth: 290,
-			    gutter: 45,
+			    	gutter: 45,
 					itemSelector : '.pin',
-			    isFitWidth: true,
+			    	isFitWidth: true,
 					transitionDuration: '0s',
-					stamp: '#leftbar'
-				}).css('opacity','1');
-				$('.stream_container').find('.loader').hide();
+					stamp: '#filters'
+				}).css('opacity',1);;
+    				$grid.css('opacity',1);
+					$grid.find('.dimmer').removeClass('active');
+					$('.stream_container').find('.loader').removeClass('active');
 
-				}, 500)
-			});
+				}, 100)
+			});	
+}
+
+///// PINS
+
+$('document').ready(function(){
+	$.ajax({
+		'url': '/pins/grid',
+		'success': function(data){
+			reloadPins(data);
 		}
 	})
 })
+
+
+////////////// FILTERING /////////////////
+
+
+// get the active filters
+function getActiveFilters(){
+	$filters={};
+	$('#active_filters span').each(function(index, element){
+		$filters[$(element).data('filter')]={};
+	});
+
+	$.each($filters,function(key,value){
+		$('#active_filters span.'+key).each(function(index, element) {
+			$filters[key]['item'+index] = $(element).data('value');
+		});
+	});
+
+	return $filters;
+}
+
+
+// FILTERS
+$(document).on('click','.filter',function(){
+	$filter = $(this).data('filter');
+	$value = $(this).data('value');
+	$text = $(this).find('text').html();
+
+
+	$active_filter = $('.active_filter[data-value="'+$value+'"][data-filter="'+$filter+'"]');
+	
+	if ($active_filter.length == 0) 
+	{
+		$('#active_filters').show().append('<span data-value="'+$value+'" data-filter="'+$filter+'" class="'+$filter+' active_filter ui large teal label">'+$text+'<i class="delete icon"></i></span>');
+	} 
+	else 
+	{
+		$active_filter.remove();
+	}
+
+	if ($(this).data('exclusive')==true){
+		$('.filter[data-value!="'+$value+'"][data-filter="'+$filter+'"]').removeClass('red');
+		$('.active_filter[data-value!="'+$value+'"][data-filter="'+$filter+'"]').remove();
+	}
+
+	$(this).toggleClass('active');
+
+	doSort();
+
+})
+
+function doSort($sortBy,$sortOrder, callback){
+
+	 if ($sortBy) {
+	 	$('#sort_by').html($sortBy);
+	 } else {
+	 	 $sortBy = $('#sort_by').html();
+	 }
+
+	 if ($sortOrder) {
+	 	$('#sort_order').html($sortOrder);
+	 } else {
+	 	 $sortOrder = $('#sort_order').html();
+	 }
+
+	$grid = $('#stream').find('grid');
+    $grid.css('opacity',0);
+	$grid.find('.dimmer').addClass('active');
+	$filters=getActiveFilters();
+	$.get('/pins/grid', {sortBy:$sortBy, sortOrder:$sortOrder, filters:JSON.stringify($filters)}, 
+    	function(data) 
+    	{
+			reloadPins(data); 		
+
+			$grid.infinitescroll('destroy');
+			$grid.data('infinitescroll', null);
+
+      // More ASSETS
+     	$grid.infinitescroll({
+        navSelector  : ".paginate",            
+        nextSelector : ".paginate a:last",    
+        itemSelector : "li.column",
+        loading: {
+    		finished: function(){
+        	$('#more_assets').parent().detach().appendTo('.asset.grid');
+    		},
+    		msgText: ''
+    	}
+      });
+
+     $grid.infinitescroll('pause');
+
+     $('#more_assets').click(function(){
+     	$( document ).unbind('ajaxStart.grid');
+      	$grid.infinitescroll('retrieve');
+     })
+
+   		if ($('body').attr('id')=='likesrank')
+      {
+			 $grid.find('.assetbox_likes').slice(3).show();
+   		}
+
+   		if (callback) {callback();}
+	});
+
+  
+}
+
+// SORTING
+$(document).on('click','.sort',function(){
+	$this=$(this);
+	$('.sort').removeClass('active').find('i').addClass('ui hidden');;
+	$this.addClass('active').find('i').removeClass('hidden');
+	$currentOrder=$this.data('order');
+	$('.stream_container').find('.loader').addClass('active');
+
+	if ($currentOrder=='asc') {
+		$newOrder='desc'
+		$newClass="icon down chevron"
+	} else {
+		$newOrder='asc'
+		$newClass="icon up chevron"
+	};
+	$this.data('order',$newOrder)
+	$this.children('i').attr('class',$newClass);
+	doSort($this.data('sort'),$newOrder)
+});
+
+$(document).on('keyup', '#f_search input', function(e){
+	$this=$(this);
+		$text = $this.val();
+		$filter = $this.data('filter');
+		$value = $this.data('value');
+		$validation = 1;
+		if ($text=='') {$this.css('border','1px solid red'); $validation = 0}
+				console.log($text);;
+
+		if ($validation==1){
+			$active_filter = $('.active_filter[data-filter="'+$filter+'"]');
+	
+			if ($active_filter.length == 0) 
+			{
+				$('#active_filters').show().append('<span data-value="'+$text+'" data-filter="'+$filter+'" class="'+$filter+' active_filter ui large teal label">'+$text+'<i class="delete icon"></i></span>');
+			} 
+			else 
+			{
+				$active_filter.html($text).data('value',$text);
+			}
+			doSort();
+		}
+		else{
+			$active_filter.remove();
+						doSort();
+
+		}
+
+});

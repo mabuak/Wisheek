@@ -1,5 +1,10 @@
 @if ($stream->count() > 0)
-<div class="ui active centered inline loader"></div>
+
+<div class="ct">
+<div id='active_filters'></div>
+</div>
+<div class="ui active loader"></div>
+
 
 <ul class="pins grid special cards" id="stream">
 

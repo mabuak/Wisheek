@@ -24,6 +24,7 @@ Wisheek
 {!! HTML:: script('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js') !!} 
 {!! HTML:: script('js/dragdealer.min.js') !!} 
 {!! HTML:: script('js/jquery.masonry.js') !!} 
+{!! HTML:: script('js/jquery.infinitescroll.js') !!} 
 {!! HTML:: script('js/semantic.min.js') !!} 
 {!! HTML:: style('css/responsive.css') !!}
 

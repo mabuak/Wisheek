@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pin extends Model {
 
   protected $table  = "pins";
-  protected $fillable = ['price','want_price','title','image','user_id','store','url','hash'];
+  protected $fillable = ['price','want_price', 'actual_price','title','image','user_id','store','url','hash'];
   
   public function likes() {
         return $this->morphMany('App\Vote','votable')->where('type',0);

@@ -30,25 +30,32 @@ class ScrapeService implements ScrapeServiceContract{
 
    }
  
-  public function scrape($url)
+  public function scrapePrice($url, Crawler $crawler = null)
   {
-    $data['pins'] = [];
+    if ($crawler == null)
+    {
+      $client = Client::getInstance();
+      //$client->isLazy();
+      $client->getEngine()->setPath('bin/phantomjs');
 
-    $client = Client::getInstance();
-    //$client->isLazy();
-    $client->getEngine()->setPath('../bin/phantomjs');
+      $request  = $client->getMessageFactory()->createRequest();
+      $response = $client->getMessageFactory()->createResponse();
+      
+      $request->setMethod('GET');
+      $request->setUrl($url);
+      
+      $client->send($request, $response);
 
-    $request  = $client->getMessageFactory()->createRequest();
-    $response = $client->getMessageFactory()->createResponse();
-    
-    $request->setMethod('GET');
-    $request->setUrl($url);
-    
-    $client->send($request, $response);
+      $page =  $response->getContent();
 
-    $page =  $response->getContent();
+      $crawler = new Crawler($page);
+    }
+    else
+    {
+      $client = Client::getInstance();
+      $client->getEngine()->setPath('../bin/phantomjs');
+    }
 
-    $crawler = new Crawler($page);
 
 
     $xprice = '//*[(';
@@ -61,7 +68,7 @@ class ScrapeService implements ScrapeServiceContract{
 
     $xprice = rtrim($xprice, 'or ');
     $xprice = $xprice.')]';
-    
+
     if ($crawler->filterXPath($xprice)->count() > 0) {
 
       $price = $crawler->filterXPath($xprice)->first()->text();
@@ -99,20 +106,45 @@ class ScrapeService implements ScrapeServiceContract{
       
       //dd($xprice);
 
-      $price = $crawler->filterXPath($xprice)->first()->text();
+      $price = $crawler->filterXPath($xprice)->last()->text();
 
     }
 
       $price = filter_var($price,FILTER_SANITIZE_NUMBER_INT);
       $price = rtrim($price, '-');
 
+      return $price;
 
+
+  }
+
+  public function scrape($url)
+  {
+    $data['pins'] = [];
+
+    $client = Client::getInstance();
+    $client->isLazy();
+    $client->getEngine()->setPath('../bin/phantomjs');
+
+    $request  = $client->getMessageFactory()->createRequest();
+    $response = $client->getMessageFactory()->createResponse();
+    
+    $request->setMethod('GET');
+    $request->setUrl($url);
+    
+    $client->send($request, $response);
+
+    $page =  $response->getContent();
+
+    $crawler = new Crawler($page);
 
     $title = $crawler->filter('title')
                    ->reduce(function ($node, $i) {
                       return 0 == 0;                    
                     })
                    ->text();
+
+    $price = $this->scrapePrice($url, $crawler);
 
     $store = parse_url($url)['host'];
  
@@ -121,13 +153,15 @@ class ScrapeService implements ScrapeServiceContract{
                       ->reduce(function ($node, $i) {
 
 
-                        return strpos($node->attr('src'),'logo') == false && ($node->attr('height')>150 || $node->attr('height')==null) && $node->attr('src') && strpos($node->attr('src'),'blank')==false;
+                        return strpos($node->attr('src'),'logo') == false && ($node->attr('height')>150 || $node->attr('height')==null) && $node->attr('src') && strpos($node->attr('src'),'blank')==false && strpos($node->attr('src'),'gif') == false;
 
 
                     })->each(function ($node, $i) {
                       return $node->attr('src');
                     });
     $pins = []; 
+
+    $images = array_slice($images,0,5);
 
     foreach ($images as $i=>$image){
 
@@ -140,7 +174,7 @@ class ScrapeService implements ScrapeServiceContract{
    
       $pin['image'] = $image;
       if (strpos($pin['image'],'http') === false){
-        $pin['image'] = 'http://'.$pin['store'].$pin['image'];
+        $pin['image'] = 'http://'.$pin['store'].'/'.$pin['image'];
       }
 
       // generate the hash for the post

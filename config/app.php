@@ -243,7 +243,7 @@ return [
 
     'main_selectors' => ['content','fiche','main'],
     'attributes' => ['id','class','itemprop'],
-    'price_best' => ['bigPrice','withVAT','dph','pricenormal'],
+    'price_best' => ['bigPrice','withVat','dph'],
     'price_ok' => ['price','prix','cena'],
     'price_nok' => ['without','before','used','empty', 'Empty'],
 
