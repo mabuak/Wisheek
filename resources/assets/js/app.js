@@ -16,6 +16,9 @@ $(document).ready(function(){
 	 new Dragdealer('dragdeal');
 })
 
+
+console.log(History.getCurrentIndex());
+
 $('#new_pin_btn').click(function(){
 	$input = $(this).prev('input');
 	$errors = $('#errors').show();
@@ -40,7 +43,7 @@ $('#new_pin_btn').click(function(){
 		'success' : function (response){
 			$('#new_pin .card').dimmer('hide');
 
-			$('#new_pins').html($(response)).fadeIn();
+			$('#new_pins_div').html($(response)).fadeIn();
 			$('#new_pins').imagesLoaded(function() {
 				$('#new_pins').masonry({
 					columnWidth: 320,

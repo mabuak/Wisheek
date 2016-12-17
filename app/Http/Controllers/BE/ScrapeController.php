@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\BE;
 
 use App\Http\Controllers\Controller;
 
 use App\Services\Contracts\ScrapeServiceContract;
 
 use Illuminate\Http\Request;
-use JonnyW\PhantomJs\Client;
 
 class ScrapeController extends Controller {
 	
@@ -23,10 +22,19 @@ class ScrapeController extends Controller {
    	  $this->scrapeService = $scrapeService;
   	}	
  
-    public function scrape(Request $request)
+    public function scrape($url)
     {
-      $data = $this->scrapeService->scrape($request->get('url'));
-      return view('pins/pinset',$data);
+
+      $data = $this->scrapeService->scrape($url);
+
+      if ($data['status']==0)
+      {
+        return 0;
+      } 
+      elseif ($data['status']==1)
+      {
+        return 1;
+      }
     }
 
     public function run()

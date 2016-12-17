@@ -4,6 +4,7 @@ namespace App\Services;
  
 use App\Repositories\Contracts\ScrapeRepositoryContract;
 use App\Repositories\Contracts\PinRepositoryContract;
+use App\Repositories\Contracts\SelectorRepositoryContract;
 
 use App\Services\Contracts\ScrapeServiceContract;
 
@@ -21,21 +22,25 @@ class ScrapeService implements ScrapeServiceContract{
   public function __construct(
     ScrapeRepositoryContract $scrapeRepository,
     PinRepositoryContract $pinRepository,
+    SelectorRepositoryContract $selectorRepository,
     MailServiceContract $mailService
   )
   {
     $this->scrape = $scrapeRepository;
     $this->pin = $pinRepository;
+    $this->selector = $selectorRepository;
     $this->mailService = $mailService;
 
    }
  
   public function scrapePrice($url, Crawler $crawler = null)
   {
+          dd(1);
+
     if ($crawler == null)
     {
       $client = Client::getInstance();
-      //$client->isLazy();
+      $client->isLazy();
       $client->getEngine()->setPath('bin/phantomjs');
 
       $request  = $client->getMessageFactory()->createRequest();
@@ -120,6 +125,11 @@ class ScrapeService implements ScrapeServiceContract{
 
   public function scrape($url)
   {
+
+    $store = parse_url($url)['host'];
+
+    if ($this->selector->storeExists($store))
+    {
     $data['pins'] = [];
 
     $client = Client::getInstance();
@@ -131,7 +141,8 @@ class ScrapeService implements ScrapeServiceContract{
     
     $request->setMethod('GET');
     $request->setUrl($url);
-    
+    $request->setTimeout(1000);
+
     $client->send($request, $response);
 
     $page =  $response->getContent();
@@ -146,7 +157,7 @@ class ScrapeService implements ScrapeServiceContract{
 
     $price = $this->scrapePrice($url, $crawler);
 
-    $store = parse_url($url)['host'];
+    
  
     $images = $crawler->filter('img')
                       ->filterXPath('//img[ancestor::*[contains(@id, "content") or contains(@id, "fiche") or contains(@id, "main")]]')
@@ -186,8 +197,16 @@ class ScrapeService implements ScrapeServiceContract{
     }
 
     $data['pins'] = $pins;
+    $data['status']=0;
     return $data;
 
+  } 
+  else
+  {
+    $data['status']=1;
+    $data['url']=$url;
+    return $data;
   }
  
+ }
 }
