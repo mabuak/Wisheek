@@ -26,7 +26,14 @@ class ScrapeController extends Controller {
     public function scrape(Request $request)
     {
       $data = $this->scrapeService->scrape($request->get('url'));
-      return view('pins/pinset',$data);
+      if ($data['status']==1)
+      {
+        return view('pins/pinset',$data);
+      } 
+      else
+      {
+        return view('pins/frame',$data);
+      }
     }
 
     public function run()

@@ -4,7 +4,6 @@ namespace App\Services;
  
 use App\Repositories\Contracts\ScrapeRepositoryContract;
 use App\Repositories\Contracts\PinRepositoryContract;
-use App\Repositories\Contracts\SelectorRepositoryContract;
 
 use App\Services\Contracts\ScrapeServiceContract;
 
@@ -22,13 +21,11 @@ class ScrapeService implements ScrapeServiceContract{
   public function __construct(
     ScrapeRepositoryContract $scrapeRepository,
     PinRepositoryContract $pinRepository,
-    SelectorRepositoryContract $selectorRepository,
     MailServiceContract $mailService
   )
   {
     $this->scrape = $scrapeRepository;
     $this->pin = $pinRepository;
-    $this->selector = $selectorRepository;
     $this->mailService = $mailService;
 
    }
@@ -38,7 +35,7 @@ class ScrapeService implements ScrapeServiceContract{
     if ($crawler == null)
     {
       $client = Client::getInstance();
-      $client->isLazy();
+      //$client->isLazy();
       $client->getEngine()->setPath('bin/phantomjs');
 
       $request  = $client->getMessageFactory()->createRequest();
@@ -123,10 +120,6 @@ class ScrapeService implements ScrapeServiceContract{
 
   public function scrape($url)
   {
-
-    if ($this->selector->urlExists($url))
-    {
-
     $data['pins'] = [];
 
     $client = Client::getInstance();
@@ -138,8 +131,7 @@ class ScrapeService implements ScrapeServiceContract{
     
     $request->setMethod('GET');
     $request->setUrl($url);
-    $request->setTimeout(1000);
-
+    
     $client->send($request, $response);
 
     $page =  $response->getContent();
@@ -194,16 +186,8 @@ class ScrapeService implements ScrapeServiceContract{
     }
 
     $data['pins'] = $pins;
-    $data['status']=1;
     return $data;
 
-  } 
-  else
-  {
-    $data['status']=0;
-    $data['url']=$url;
-    return $data;
   }
  
- }
 }

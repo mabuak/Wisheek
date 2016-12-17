@@ -32,9 +32,9 @@ Paste the URL of your product, click search
 	</div>
 </div>
 
-<ul class="pins grid special cards" id="new_pins">
+<div id="new_pins_div">
 
-</ul>
+</div>
 
 </div>
 </div>

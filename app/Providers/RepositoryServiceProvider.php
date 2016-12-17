@@ -43,8 +43,8 @@ class RepositoryServiceProvider extends ServiceProvider {
     );
 
     $this->app->bind(
-      'App\Repositories\Contracts\BreedRepositoryContract', 
-      'App\Repositories\BreedRepository'
+      'App\Repositories\Contracts\SelectorRepositoryContract', 
+      'App\Repositories\SelectorRepository'
     );
 
     $this->app->bind(

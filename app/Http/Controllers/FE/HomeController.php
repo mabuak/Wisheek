@@ -1,8 +1,9 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\FE;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Services\Contracts\PinServiceContract;
+use App\Http\Controllers\Controller;
 
 use Auth;
 
@@ -26,6 +27,8 @@ class HomeController extends Controller
      */
     public function index() 
     {
+
+    //dd($token = Auth::user()->createToken('Token Name')->accessToken);
 
     // logged on user
     if (Auth::check())

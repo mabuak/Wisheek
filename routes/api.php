@@ -13,4 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/pins', 'PinController@search')->middleware('auth:api');
+Route::group(['middleware' => 'auth:api'], function () {
+
+Route::resource('pin', 'PinController');
+
+Route::post('/login', ['uses' => 'BE\AuthController@postLogin', 'as' => 'auth.postLogin']);
+Route::any('logout', ['uses' => 'BE\AuthController@getLogout', 'as' => 'auth.logout']);
+
+
+});

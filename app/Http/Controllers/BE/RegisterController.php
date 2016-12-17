@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\BE;
 
 use App\Http\Controllers\Controller;
 
@@ -50,12 +50,7 @@ class RegisterController extends Controller {
 	  {
     	$response = $this->registerService->create($request->all());
 
-      if (!$response)
-      {
-         return redirect('/register?code='.$request->get('code'))->withInput()->withErrors('Something went wrong. Try again please');
-      }
-      
-  		return redirect('/');
+      return $response;
    }
 
     public function sendWelcomeEmail()

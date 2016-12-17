@@ -26,6 +26,8 @@ Wisheek
 {!! HTML:: script('js/jquery.masonry.js') !!} 
 {!! HTML:: script('js/jquery.infinitescroll.js') !!} 
 {!! HTML:: script('js/semantic.min.js') !!} 
+{!! HTML:: script('js/jquery.history.js') !!} 
+
 {!! HTML:: style('css/responsive.css') !!}
 
 <script>
