@@ -63,13 +63,7 @@ class AuthController extends Controller {
     public function handleProviderCallback($provider)
     {
         $user = $this->authService->getSocialUser($provider);
-        if ($user['existing']==0) 
-        { 
-        	return 0;
-   	 	}
-    	else{
-        	return 404;
-    	}
+        return $user;
     }
 
 	public function loggedIn($user)

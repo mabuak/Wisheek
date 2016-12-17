@@ -52,11 +52,15 @@ class AuthController extends Controller {
         return $this->BE->redirectToProvider($provider);
     }
  
+	public function redirectToProvider($provider)
+    {
+        return $this->BE->redirectToProvider($provider);
+    }
 
     public function handleProviderCallback($provider)
     {
         $user = $this->BE->handleProviderCallback($provider);
-        if ($user==0) { 
+        if ($user['existing']==0) { 
         	return redirect('/register')->withInput($user);
    	 	}
     	else{
@@ -64,7 +68,7 @@ class AuthController extends Controller {
 
     	}
     }
-
+    
 	public function loggedIn($user)
 	{
 		return redirect('/');

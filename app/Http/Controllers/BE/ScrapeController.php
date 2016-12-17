@@ -35,6 +35,7 @@ class ScrapeController extends Controller {
       {
         return 1;
       }
+      
     }
 
     public function run()

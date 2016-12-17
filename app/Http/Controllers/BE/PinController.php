@@ -18,7 +18,6 @@ class PinController extends Controller {
     $this->pinService = $pinService;
   }
 
-
   public function show($hash) 
   {
 
@@ -26,6 +25,34 @@ class PinController extends Controller {
 
     return $pin;
 
+  /**
+   * Display a listing of the resource.
+   *
+   * @return View
+   */
+	public function index() 
+	{
+		return view('pins/all');
+	}
+
+
+  public function create() 
+  {
+    return view('pins/add');
+  }
+
+  public function show($hash, Request $request) 
+  {
+    $isEdit = $request->segment(3)=='edit';
+
+    $data = $this->pinService->get($hash);
+    $data['editmode'] = $isEdit;
+
+    if ($isEdit){
+    $data['bodyname'] = 'editpin';
+    }
+
+    return view('pins/view', $data);
   }
 
   public function edit($hash, Request $request)

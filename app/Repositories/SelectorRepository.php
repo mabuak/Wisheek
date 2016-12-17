@@ -24,9 +24,15 @@ class SelectorRepository extends BaseRepository implements SelectorRepositoryCon
       $this->model = $model;
    }
 
+<<<<<<< HEAD
   public function storeExists($store)
   {
     return $this->model->where('store',$store)->count();
+=======
+  public function urlExists($url)
+  {
+    return $this->model->where('url',$url)->count();
+>>>>>>> origin/master
   }
   
 
