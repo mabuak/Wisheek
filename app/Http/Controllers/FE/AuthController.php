@@ -52,10 +52,6 @@ class AuthController extends Controller {
         return $this->BE->redirectToProvider($provider);
     }
  
-	public function redirectToProvider($provider)
-    {
-        return $this->BE->redirectToProvider($provider);
-    }
 
     public function handleProviderCallback($provider)
     {
@@ -68,7 +64,7 @@ class AuthController extends Controller {
 
     	}
     }
-    
+
 	public function loggedIn($user)
 	{
 		return redirect('/');

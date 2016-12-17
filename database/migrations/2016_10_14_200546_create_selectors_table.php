@@ -13,11 +13,7 @@ class CreateSelectorsTable extends Migration
     public function up()
     {
         Schema::create('selectors', function (Blueprint $table) {
-<<<<<<< HEAD
             $table->string('store')->primary();
-=======
-            $table->string('url')->primary();
->>>>>>> origin/master
             $table->string('selector');
             $table->timestamps();
         });

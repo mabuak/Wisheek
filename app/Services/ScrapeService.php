@@ -126,16 +126,11 @@ class ScrapeService implements ScrapeServiceContract{
   public function scrape($url)
   {
 
-<<<<<<< HEAD
     $store = parse_url($url)['host'];
 
     if ($this->selector->storeExists($store))
     {
-=======
-    if ($this->selector->urlExists($url))
-    {
 
->>>>>>> origin/master
     $data['pins'] = [];
 
     $client = Client::getInstance();
@@ -203,21 +198,15 @@ class ScrapeService implements ScrapeServiceContract{
     }
 
     $data['pins'] = $pins;
-<<<<<<< HEAD
     $data['status']=0;
-=======
-    $data['status']=1;
->>>>>>> origin/master
+
     return $data;
 
   } 
   else
   {
-<<<<<<< HEAD
     $data['status']=1;
-=======
-    $data['status']=0;
->>>>>>> origin/master
+
     $data['url']=$url;
     return $data;
   }

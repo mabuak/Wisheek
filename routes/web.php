@@ -40,10 +40,4 @@ Route::post('password/reset/{token}', 'FE\ReminderController@postReset');
 Route::post('/scrape', array('uses' =>'FE\ScrapeController@scrape'));
 
 //Pins
-<<<<<<< HEAD
 Route::resource('pin', 'PinController');
-=======
->>>>>>> origin/master
-Route::get('pin/{hash}', ['uses'=>'FE\PinController@show','as'=>'pin.show']);
-Route::get('pin/{hash}/edit', ['uses'=>'FE\PinController@edit','as'=>'pin.edit']);
-Route::get('/pins/grid', 'FE\PinController@grid');

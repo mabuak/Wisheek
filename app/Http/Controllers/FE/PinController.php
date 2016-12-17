@@ -1,18 +1,10 @@
 <?php
  
-<<<<<<< HEAD
 namespace App\Http\Controllers\FE;
 
 use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\BE\PinController as BE;
-=======
-namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
-
-use App\Services\Contracts\PinServiceContract;
->>>>>>> origin/master
 use App\Http\Requests\PinRequest;
 
 use Illuminate\Http\Request;
@@ -21,16 +13,10 @@ use Session;
 
 class PinController extends Controller {
 
-<<<<<<< HEAD
 	public function __construct(BE $BE)
 	{
     $this->BE = $BE;
-=======
-	public function __construct(PinServiceContract $pinService)
-	{
-    $this->pinService = $pinService;
->>>>>>> origin/master
-  }
+	  }
 
   /**
    * Display a listing of the resource.
@@ -51,8 +37,6 @@ class PinController extends Controller {
   public function show($hash, Request $request) 
   {
     $isEdit = $request->segment(3)=='edit';
-
-<<<<<<< HEAD
     if ($isEdit)
     {
       $data['bodyname'] = 'editpin';
@@ -62,14 +46,7 @@ class PinController extends Controller {
     $data = $this->BE->show($hash);
     $data['editmode'] = $isEdit;
 
-=======
-    $data = $this->pinService->get($hash);
-    $data['editmode'] = $isEdit;
 
-    if ($isEdit){
-    $data['bodyname'] = 'editpin';
-    }
->>>>>>> origin/master
 
     return view('pins/view', $data);
   }
@@ -77,13 +54,9 @@ class PinController extends Controller {
   public function edit($hash, Request $request)
   { 
 
-<<<<<<< HEAD
    $pin = $this->BE->get($hash)['pin'];
    $this->BE->checkOwner($pin->id);
-=======
-   $pin = $this->pinService->get($hash)['pin'];
-   $this->pinService->checkOwner($pin->id);
->>>>>>> origin/master
+
     return $this->show($hash, $request);
   }
 
@@ -95,23 +68,14 @@ class PinController extends Controller {
    */
 	public function store(PinRequest $request) 
 	{
-<<<<<<< HEAD
 			$response = $this->BE->create($request->all());
-=======
-			$response = $this->pinService->create($request->all());
->>>>>>> origin/master
-		  
+
       return 1;
 	}
 	
   public function update($id, Request $request) 
   {
-      
-<<<<<<< HEAD
-      return $response = $this->BE->update($id, $request->except('_token'));
-=======
-      return $response = $this->pinService->update($id, $request->except('_token'));
->>>>>>> origin/master
+    return $response = $this->BE->update($id, $request->except('_token'));
   }
   
 
@@ -125,19 +89,12 @@ class PinController extends Controller {
    */
   public function destroy($id)
   {
-<<<<<<< HEAD
     $this->BE->checkOwner($id);
 
     try 
     {
       $data = $this->BE->delete($id);
-=======
-    $this->pinService->checkOwner($id);
 
-    try 
-    {
-      $data = $this->pinService->delete($id);
->>>>>>> origin/master
     } 
     catch (Exception $e) 
     {
@@ -175,11 +132,8 @@ class PinController extends Controller {
     $paginate=$request->get('paginate');
 
     $data = [
-<<<<<<< HEAD
       'results' => $this->BE->search($filters,$sortBy,$sortOrder,$paginate),
-=======
-      'results' => $this->pinService->search($filters,$sortBy,$sortOrder,$paginate),
->>>>>>> origin/master
+
       'filters' => $filters,
       'sortBy' => $sortBy,
       'sortOrder' => $sortOrder
