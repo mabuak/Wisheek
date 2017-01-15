@@ -21,11 +21,19 @@ class ScrapeController extends Controller {
   	{
    	  $this->scrapeService = $scrapeService;
   	}	
+
+    public function checkSelector($store){
+
+      $result = $this->BE->checkSelector($store);
+
+      return $result;
+
+    }
  
-    public function scrape($url)
+    public function scrape($url, $price)
     {
 
-      $data = $this->scrapeService->scrape($url);
+      $data = $this->scrapeService->scrape($url, $price);
 
       if ($data['status']==0)
       {

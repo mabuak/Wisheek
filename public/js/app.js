@@ -17,7 +17,6 @@ $(document).ready(function(){
 })
 
 
-console.log(History.getCurrentIndex());
 
 $('#new_pin_btn').click(function(){
 	$input = $(this).prev('input');
@@ -41,9 +40,16 @@ $('#new_pin_btn').click(function(){
 		'url' : '/scrape/',
 		'data': { url: $input.val()},
 		'success' : function (response){
-			$('#new_pin .card').dimmer('hide');
 
+			if ($(response).find('#new_pins').length > 0) {
+				$mode = 0;
+			} else {
+				$mode = 1;
+			}
+
+			$('#new_pin .card').dimmer('hide');
 			$('#new_pins_div').html($(response)).fadeIn();
+
 			$('#new_pins').imagesLoaded(function() {
 				$('#new_pins').masonry({
 					columnWidth: 320,
@@ -63,28 +69,44 @@ $('#new_pin_btn').click(function(){
 			  on: 'hover'
 			});
 			
-			$('#new_pin_price_div').css('display','inline-block');
-		    $('#dragdeal .handle').html(Math.round((0.75*$price)));
-		    $pin.data('want_price', Math.round(0.75*$price));
+			if ($mode==0){
+				$('#new_pin_price_div').css('display','inline-block');
+			    $('#dragdeal .handle').html(Math.round((0.75*$price)));
+			    $pin.data('want_price', Math.round(0.75*$price));
 
-			new Dragdealer('dragdeal', {
-		      x: 0.75,
-		      steps :301,
-		      snap: true,
-		      animationCallback: function(x, y) {
-		        $('.new.pin .want_price').find('.label').html(Math.round((x*$price)));
-		        $('#dragdeal .handle').html(Math.round((x*$price)));
-		        $pin.data('want_price', Math.round(x*$price));
+				new Dragdealer('dragdeal', {
+			      x: 0.75,
+			      steps :301,
+			      snap: true,
+			      animationCallback: function(x, y) {
+			        $('.new.pin .want_price').find('.label').html(Math.round((x*$price)));
+			        $('#dragdeal .handle').html(Math.round((x*$price)));
+			        $pin.data('want_price', Math.round(x*$price));
 
-		      },
-		      callback: function(x, y){
-		      }
-		    });
+			      },
+			      callback: function(x, y){
+			      }
+			    });
+			}
 		},
 		'error': function (response){
 			$('#new_pin').hide();
 		}
 	
+	});
+});
+
+$(document).on('click','#selector_price_btn', function(){
+
+	$urlInput = $('#new_pin_input').find('input');
+	$input = $('input[name=selector_price]');
+	$.ajax({
+		'method': 'POST',
+		'url' : '/scrape/',
+		'data': { url: $urlInput.val(), price: $input.val()},
+		'success' : function (response){
+
+		}
 	});
 });
 
@@ -356,7 +378,6 @@ $(document).on('keyup', '#f_search input', function(e){
 		$value = $this.data('value');
 		$validation = 1;
 		if ($text=='') {$this.css('border','1px solid red'); $validation = 0}
-				console.log($text);;
 
 		if ($validation==1){
 			$active_filter = $('.active_filter[data-filter="'+$filter+'"]');

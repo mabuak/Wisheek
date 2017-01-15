@@ -24,6 +24,7 @@ class PinController extends Controller {
     $pin = $this->pinService->get($hash);
 
     return $pin;
+  }
 
   /**
    * Display a listing of the resource.
@@ -41,19 +42,7 @@ class PinController extends Controller {
     return view('pins/add');
   }
 
-  public function show($hash, Request $request) 
-  {
-    $isEdit = $request->segment(3)=='edit';
 
-    $data = $this->pinService->get($hash);
-    $data['editmode'] = $isEdit;
-
-    if ($isEdit){
-    $data['bodyname'] = 'editpin';
-    }
-
-    return view('pins/view', $data);
-  }
 
   public function edit($hash, Request $request)
   { 
@@ -106,24 +95,6 @@ class PinController extends Controller {
     
     return 1;
   }
-
-
-  // function for sorting and filtering dogs in JSON
-  public function grid(Request $request) 
-  {
-
-    $result = $this->search($request);
-
-    $data = [
-      'stream' => $result['results'],
-      'filters' => $result['filters'],
-      'sortBy' => $result['sortBy'],
-      'sortOrder' => $result['sortOrder']
-    ];
-
-    return view('pins/grid', $data)->render();
-  }
-
 
 
   // function for sorting and filtering dogs in JSON

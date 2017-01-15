@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\FE;
 
 use App\Http\Controllers\BE\ScrapeController as BE;
-namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\ScrapeServiceContract;
 use Illuminate\Http\Request;
@@ -20,10 +18,26 @@ class ScrapeController extends Controller {
   	public function __construct(BE $BE)
   	{
    	  $this->BE = $BE;
+    }
 
-      $data = $this->BE->scrape($request->get('url'));
-      if ($data['result']==1)
-           {
+    public function checkSelector(Request $request){
+
+      $store = $request->get('store');
+      $result = $this->BE->checkSelector($store);
+
+      return $result;
+
+    }
+
+   public function scrape(Request $request){
+      $url = $request->get('url');
+      $price = $request->get('price');
+
+      $result = $this->BE->scrape($url, $price);
+      $data = [];
+
+      if ($result==0)
+      {
         return view('pins/pinset',$data);
       } 
       else

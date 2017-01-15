@@ -35,8 +35,6 @@ class ScrapeService implements ScrapeServiceContract{
  
   public function scrapePrice($url, Crawler $crawler = null)
   {
-          dd(1);
-
     if ($crawler == null)
     {
       $client = Client::getInstance();
@@ -123,14 +121,47 @@ class ScrapeService implements ScrapeServiceContract{
 
   }
 
-  public function scrape($url)
-  {
+  public function scrapePriceKnown($url, $price, Crawler $crawler = null){
 
+    if ($crawler == null)
+    {
+      $client = Client::getInstance();
+      $client->isLazy();
+      $client->getEngine()->setPath('bin/phantomjs');
+
+      $request  = $client->getMessageFactory()->createRequest();
+      $response = $client->getMessageFactory()->createResponse();
+      
+      $request->setMethod('GET');
+      $request->setUrl($url);
+      
+      $client->send($request, $response);
+
+      $page =  $response->getContent();
+
+      $crawler = new Crawler($page);
+    }
+    else
+    {
+      $client = Client::getInstance();
+      $client->getEngine()->setPath('../bin/phantomjs');
+    }
+
+
+      $xprice = "//*[(number(text(".$price."))]";
+
+      $price = $crawler->filterXPath($xprice)->first()->text();
+      
+      dd($xprice);
+  }
+
+
+  public function scrape($url, $price = null)
+  {
     $store = parse_url($url)['host'];
 
-    if ($this->selector->storeExists($store))
+    if ($this->selector->storeExists($store) || $price!=null)
     {
-
     $data['pins'] = [];
 
     $client = Client::getInstance();
@@ -156,9 +187,9 @@ class ScrapeService implements ScrapeServiceContract{
                     })
                    ->text();
 
-    $price = $this->scrapePrice($url, $crawler);
+    //$price = $this->scrapePrice($url, $crawler);
+    $price = $this->scrapePriceKnown($url, $price, $crawler);
 
-    
  
     $images = $crawler->filter('img')
                       ->filterXPath('//img[ancestor::*[contains(@id, "content") or contains(@id, "fiche") or contains(@id, "main")]]')
@@ -198,18 +229,15 @@ class ScrapeService implements ScrapeServiceContract{
     }
 
     $data['pins'] = $pins;
-    $data['status']=0;
 
     return $data;
 
-  } 
-  else
-  {
+  } else {
     $data['status']=1;
 
     $data['url']=$url;
     return $data;
-  }
+  } 
+}
  
- }
 }

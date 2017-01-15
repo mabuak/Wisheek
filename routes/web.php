@@ -38,6 +38,8 @@ Route::post('password/reset/{token}', 'FE\ReminderController@postReset');
 
 //Scrape
 Route::post('/scrape', array('uses' =>'FE\ScrapeController@scrape'));
+Route::get('/checkSelector', array('uses' =>'FE\ScrapeController@checkSelector'));
 
 //Pins
 Route::resource('pin', 'PinController');
+Route::get('/pins/grid', ['uses' => 'FE\PinController@grid', 'as' => 'pins.grid']);

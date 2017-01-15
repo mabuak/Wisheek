@@ -47,7 +47,6 @@ class PinController extends Controller {
     $data['editmode'] = $isEdit;
 
 
-
     return view('pins/view', $data);
   }
 
@@ -117,29 +116,17 @@ class PinController extends Controller {
       'sortBy' => $result['sortBy'],
       'sortOrder' => $result['sortOrder']
     ];
-
     return view('pins/grid', $data)->render();
   }
 
 
 
-  // function for sorting and filtering dogs in JSON
+  // function for sorting and filtering in JSON
   public function search(Request $request) 
   {
-    If ($request->has('sortBy')) {$sortBy=$request->get('sortBy');} else {$sortBy='created_at';}
-    If ($request->has('sortOrder')) {$sortOrder=$request->get('sortOrder');} else {$sortOrder='desc';}
-    $filters=json_decode($request->get('filters'),true);
-    $paginate=$request->get('paginate');
+    $results =  $this->BE->search($request);
 
-    $data = [
-      'results' => $this->BE->search($filters,$sortBy,$sortOrder,$paginate),
-
-      'filters' => $filters,
-      'sortBy' => $sortBy,
-      'sortOrder' => $sortOrder
-    ];
-
-    return $data;
+    return $results;
 
   }
 
